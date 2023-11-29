@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="fw-light">{{ comment.user }}</h1>
+            <p class="lead text-body-secondary">{{ comment.created_at }}</p>
+        </div>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">Автор Посту: {{ comment.post.user }}</p>
+                        <p class="card-text">Пост: {{ comment.post.content }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">Автор Коментаря: {{ comment.user }}</p>
+                        <p class="card-text">Коментар: {{ comment.content }}</p>
+                        <!-- Тут можуть бути дії, пов'язані з коментарем -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
