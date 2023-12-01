@@ -175,6 +175,9 @@
         </a>
         <div class="d-flex align-items-center">
           <a href="{% url 'add_post' %}" class="btn btn-outline-info my-2 my-sm-0 ms-auto me-4">Додати Пост</a>
+          <a href="{% url 'user_list' %}" class="btn btn-outline-info my-2 my-sm-0 ms-auto me-4">Список користувачів</a>
+          <a href="{% url 'post_list' %}" class="btn btn-outline-info my-2 my-sm-0 ms-auto me-4">На головну сторінку</a>
+          <a href="{% url 'comment_list' %}" class="btn btn-outline-info my-2 my-sm-0 ms-auto me-4">Коментарі</a>
             {% if user.is_staff %}
             {% endif %}
         </div>

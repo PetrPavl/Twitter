@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
-from django.contrib.auth.models import User
+from users.models import User
 
 
 def post_list(request, username=None):
@@ -44,7 +44,7 @@ def add_comment(request, post_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.user = request.user
+            comment.user_id = request.user.id
             comment.save()
             return redirect('comment_detail', comment_id=comment.pk)
     else:
