@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h2>Logout</h2>
+          </div>
+    </div>
+</section>
+  <form method="post" action="{% url 'user_logout' %}">
+    {% csrf_token %}
+    <button class="w-100 btn btn-primary btn-lg" type="submit">Вийти</button>
+  </form>
+{% endblock %}

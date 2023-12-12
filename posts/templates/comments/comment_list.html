@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Коментарі</h1>
+        <p class="lead text-body-secondary">Список коментарів до постів</p>
+        <p>
+        </p>
+      </div>
+    </div>
+  </section>
+    <div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <h1>Читай та коментуй!</h1>
+                <div class="list-group">
+                    {% for comment in comments %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                    {% for comment in comments  %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ comment.post }} </h5>
+                                <p class="card-text">Коментар: {{ comment.content|truncatechars:300 }}</p>
+                                <p class="card-text">Дата: {{ comment.created_at|date:"d-m-Y" }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Тут можуть бути дії, пов'язані з автором -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'comment_detail' comment.pk %}">View</a></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+                        </li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&raquo;</a>
+                        </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{user}}</title>
+</head>
+<body>
+    <h1>{{user}}</h1>
+    {% for comment in comments %}
+        <div>
+            <p>{{comment.post}}</p>
+            <p>{{comment.user}}</p>
+            <p>{{comment.content}}</p>
+            <p>{{comment.created_at}}</p>
+        </div>
+{% endfor %}
+
+</body>
+</html>
